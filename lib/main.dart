@@ -55,17 +55,17 @@ class _MyListScreenState extends State {
                 onPressed: _getSchedule,
                 icon: Icon(Icons.refresh),
                 label: Text("Reload"),
-
             ),
           ],
         ),
         body: ListView.builder(
           itemCount: schedule.length,
           itemBuilder: (context, index) {
-            return ListTile(
+            var parsedTime = DateTime.parse(schedule[index].time);
+            var now = new DateTime.now();
+            return parsedTime.isAfter(now) ? ListTile(
               title: Text(schedule[index].time),
-              subtitle: Text('hello'),
-            );
+            ):null;
           },
         ));
   }
