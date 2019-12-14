@@ -1,22 +1,62 @@
+import 'dart:convert';
+import 'package:flutterapp/API.dart';
+import 'package:flutterapp/models/schedule.dart';
+import 'package:flutterapp/schedule.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
-void main() => runApp(MakeupApp());
+void main() => runApp(MyApp());
 
-class MakeupApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   @override
-  _MakeupAppState createState() => _MakeupAppState();
+  build(context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'My Http App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: MyListScreen(),
+    );
+  }
 }
 
-class _MakeupAppState extends State<MakeupApp> {
+class MyListScreen extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+  createState() => _MyListScreenState();
+}
+
+class _MyListScreenState extends State {
+  var schedule = new List<Schedule>();
+  _getSchedule() {
+    API.getSchedule().then((response) {
+      setState(() {
+        var scheduleKey = jsonDecode(response.body);
+        Iterable list = scheduleKey['data'];
+        schedule = list.map((mode) => Schedule.fromJson(mode)).toList();
+      });
+    });
+  }
+
+  initState() {
+    super.initState();
+    _getSchedule();
+  }
+
+  dispose() {
+    super.dispose();
+  }
+
+  @override
+  build(context) {
+    return Scaffold(
         appBar: AppBar(
-          title: Text("Jadwal Lita"),
+          title: Text("User List"),
         ),
-      ),
-    );
+        body: ListView.builder(
+          itemCount: schedule.length,
+          itemBuilder: (context, index) {
+            return ListTile(title: Text(schedule[index].name));
+          },
+        ));
   }
 }
