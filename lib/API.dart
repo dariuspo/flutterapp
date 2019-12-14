@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:http/http.dart' as http;
 
-const baseUrl = "https://api.litamua.com/jadwalmakeup/items/jadwal_lita?limit=10&page=0&meta=*&sort=tanggal,jam";
+const baseUrl = "https://api.litamua.com/jadwalmakeup/items/jadwal_lita?limit=10&page=0&meta=*&sort=waktu";
 //const baseUrl = "https://jsonplaceholder.typicode.com/users";
 
 class API {

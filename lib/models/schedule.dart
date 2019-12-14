@@ -1,17 +1,14 @@
 class Schedule {
   int id;
-  String name;
+  String time;
 
-  Schedule(int id, String name) {
-    this.id = id;
-    this.name = name;
-  }
+  Schedule(this.id, this.time);
 
   Schedule.fromJson(Map json)
       : id = json['id'],
-        name = json['Pemesan'];
+        time = json['waktu'];
 
   Map toJson() {
-    return {'id': id, 'name': name};
+    return {'id': id, 'time': time};
   }
 }

@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:flutterapp/API.dart';
 import 'package:flutterapp/models/schedule.dart';
-import 'package:flutterapp/schedule.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -11,7 +10,7 @@ class MyApp extends StatelessWidget {
   build(context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'My Http App',
+      title: 'Schedule',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -50,12 +49,23 @@ class _MyListScreenState extends State {
   build(context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("User List"),
+          title: Text("Jadwal Makeup"),
+          actions: <Widget>[
+            FlatButton.icon(
+                onPressed: _getSchedule,
+                icon: Icon(Icons.refresh),
+                label: Text("Reload"),
+
+            ),
+          ],
         ),
         body: ListView.builder(
           itemCount: schedule.length,
           itemBuilder: (context, index) {
-            return ListTile(title: Text(schedule[index].name));
+            return ListTile(
+              title: Text(schedule[index].time),
+              subtitle: Text('hello'),
+            );
           },
         ));
   }
